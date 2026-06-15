@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🌿 GIEO MẦM HẠNH PHÚC — Quản Lý Tài Chính & Năng Lượng</title>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--h1:#1B5E20;--h2:#2E7D32;--h3:#388E3C;--h4:#43A047;--h5:#4CAF50;--h-text:#fff;--goc-bg:#C8E6C9;--goc-text:#1B5E20;--goc-soft:#E8F5E9;--nhanh-bg:#FFF8DC;--nhanh-text:#7B4F00;--nhanh-soft:#FFFDE7;--doc-bg:#FFEBEE;--doc-text:#B71C1C;--doc-soft:#FFF5F5;--ok:#16a34a;--no:#dc2626;--warn:#f59e0b;--green-e:#16a34a;--red-e:#dc2626;--bg:#f0f5f0;--card:#fff;--txt:#1e293b;--mut:#64748b;--border:#c8e6c9;--sh:0 2px 12px rgba(27,94,32,.08),0 4px 24px rgba(27,94,32,.04);--radius:14px;--accent:#1B5E20;--s50:#e8f5e9;--s100:#c8e6c9;--s200:#a5d6a7;--s300:#81c784;--s400:#66bb6a;--s500:#4caf50;--s600:#43a047;--s700:#388e3c;--s800:#2e7d32;--s900:#1b5e20;--day0:#1B5E20;--day1:#2E7D32;--day2:#388E3C;--day3:#43A047;--day4:#4CAF50;--day5:#66BB6A;--day6:#81C784}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Be Vietnam Pro',sans-serif;background:var(--bg);color:var(--txt);min-height:100vh}
+.app{max-width:1440px;margin:0 auto;padding:12px}
+.login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#1B5E20 0%,#2E7D32 30%,#388E3C 60%,#4CAF50 100%);padding:20px}
+.login-box{background:#fff;border-radius:20px;padding:40px 32px;max-width:420px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.2);text-align:center}
+.login-box h1{font-family:'Playfair Display',serif;color:var(--h1);font-size:22px;margin-bottom:4px}
+.login-box p{color:var(--mut);font-size:12px;margin-bottom:24px}
+.login-box .field{text-align:left;margin-bottom:14px}
+.login-box .field label{font-size:10px;color:var(--mut);font-weight:600;display:block;margin-bottom:3px;text-transform:uppercase;letter-spacing:.3px}
+.login-box input{width:100%;padding:10px 14px;border:1.5px solid var(--s200);border-radius:10px;font-size:14px;outline:none;font-family:inherit;transition:border .2s}
+.login-box input:focus{border-color:var(--s500)}
+.login-btn{width:100%;padding:12px;border:none;border-radius:10px;background:linear-gradient(135deg,var(--h1),var(--h3));color:#fff;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;margin-top:8px;transition:opacity .2s}
+.login-btn:hover{opacity:.9}
+.login-msg{margin-top:10px;font-size:12px;color:var(--no);min-height:18px}
+.main-hdr{background:linear-gradient(135deg,var(--h1),var(--h2) 35%,var(--h3) 70%,var(--h4));padding:16px 20px 12px;color:#fff;position:relative;overflow:hidden;border-radius:var(--radius) var(--radius) 0 0}
+.main-hdr::before{content:'';position:absolute;top:-60px;right:-40px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.06)}
+.main-hdr h1{font-family:'Playfair Display',serif;font-size:18px;font-weight:800;letter-spacing:.5px}
+.main-hdr p{font-size:10px;font-weight:300;opacity:.82;margin-top:2px;letter-spacing:.5px}
+.hdr-bar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-top:8px}
+.hdr-user{font-size:11px;font-weight:600;display:flex;align-items:center;gap:6px}
+.hdr-user .role-badge{padding:2px 8px;border-radius:12px;font-size:9px;font-weight:700}
+.role-npp1{background:#FFD700;color:#1B5E20}.role-npp2{background:#C0C0C0;color:#1B5E20}.role-vip{background:#E8F5E9;color:#1B5E20}.role-ctv{background:#A5D6A7;color:#1B5E20}
+.logout-btn{padding:5px 12px;border-radius:8px;border:1px solid rgba(255,255,255,.4);background:transparent;color:#fff;cursor:pointer;font-size:10px;font-weight:600;font-family:inherit}
+.logout-btn:hover{background:rgba(255,255,255,.15)}
+.tabs{background:var(--card);border-bottom:1px solid var(--s100);overflow-x:auto;white-space:nowrap;position:sticky;top:0;z-index:10}
+.tabs button{padding:10px 11px;border:none;background:transparent;color:var(--mut);font-size:11px;font-weight:500;cursor:pointer;border-bottom:2.5px solid transparent;font-family:inherit;transition:all .15s}
+.tabs button.on{background:var(--s50);color:var(--s900);font-weight:700;border-bottom-color:var(--s500)}
+.tabs button:hover{color:var(--s700)}
+.body{padding:16px 14px 30px}
+.card{background:var(--card);border-radius:var(--radius);padding:18px;box-shadow:var(--sh);margin-bottom:12px}
+.card-t{font-size:12px;font-weight:700;color:var(--s800);margin-bottom:10px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:10px;margin-bottom:16px}
+.stat{background:var(--card);border-radius:14px;padding:13px 15px;box-shadow:var(--sh);border-left:4px solid var(--s500);min-width:0}
+.stat-l{font-size:9.5px;color:var(--mut);font-weight:600;letter-spacing:.4px;margin-bottom:3px;text-transform:uppercase}
+.stat-v{font-size:16px;font-weight:700;word-break:break-all}
+.stat-s{font-size:9.5px;color:var(--mut);margin-top:3px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+@media(max-width:768px){.g2{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}}
+table{width:100%;border-collapse:collapse;font-size:12px}
+thead th{background:var(--s50);color:var(--s800);font-weight:600;padding:8px 6px;text-align:left;border-bottom:2px solid var(--s200);font-size:9.5px;text-transform:uppercase;letter-spacing:.3px;white-space:nowrap}
+tbody td{padding:7px 6px;border-bottom:1px solid var(--s50);font-size:11.5px}
+tbody tr:hover{background:var(--s50)}
+.r{text-align:right;font-variant-numeric:tabular-nums}.b{font-weight:600}
+.c-ok{color:var(--ok)}.c-no{color:var(--no)}.c-warn{color:var(--warn)}.c-sky{color:var(--s700)}
+.form-row{display:flex;gap:8px;flex-wrap:wrap;align-items:flex-end}
+.field{flex:1;min-width:100px}
+.field label{font-size:9.5px;color:var(--mut);font-weight:600;display:block;margin-bottom:2px;text-transform:uppercase;letter-spacing:.3px}
+input,select,textarea{width:100%;padding:7px 10px;border:1.5px solid var(--s200);border-radius:8px;font-size:13px;outline:none;background:var(--card);color:var(--txt);font-family:inherit;transition:border .2s}
+input:focus,select:focus,textarea:focus{border-color:var(--s400)}
+select{appearance:auto}
+.btn{padding:8px 16px;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;background:linear-gradient(135deg,var(--s800),var(--s500));color:#fff;white-space:nowrap;font-family:inherit;transition:opacity .2s}
+.btn:hover{opacity:.9}
+.btn-del{background:linear-gradient(135deg,var(--no),#f87171);padding:6px 10px;font-size:11px}
+.btn-light{background:var(--s100);color:var(--s700)}
+.del-btn{background:none;border:none;cursor:pointer;font-size:14px;color:var(--no);opacity:.5}
+.del-btn:hover{opacity:1}
+.box{background:var(--s50);border-radius:10px;padding:10px 12px;text-align:center}
+.box-l{font-size:10px;color:var(--mut)}.box-v{font-size:15px;font-weight:700;color:var(--s800)}
+.badge{display:inline-block;padding:8px 18px;border-radius:8px;font-size:14px;font-weight:700}
+.pie-wrap{display:flex;flex-direction:column;align-items:center;gap:8px}
+.pie{border-radius:50%;position:relative}
+.pie::after{content:'';position:absolute;top:25%;left:25%;width:50%;height:50%;background:var(--card);border-radius:50%}
+.pie-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2;text-align:center;font-size:11px;font-weight:700;color:var(--s800)}
+.legend-pie{display:flex;flex-wrap:wrap;gap:4px 10px;justify-content:center}
+.legend-pie span{display:inline-flex;align-items:center;gap:3px;font-size:10px;color:var(--mut)}
+.legend-pie i{width:7px;height:7px;border-radius:2px;display:inline-block}
+.tab-content{display:none}.tab-content.active{display:block}
+.footer{text-align:center;padding:12px 0;color:var(--mut);font-size:10px;border-top:1px solid var(--border);margin-top:14px}
+.nrg{display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:5px;font-size:10px;font-weight:700;letter-spacing:.2px}
+.nrg-green{background:#dcfce7;color:#15803d}.nrg-red{background:#fee2e2;color:#b91c1c}
+.nrg-bar{height:24px;border-radius:6px;display:flex;overflow:hidden;margin:6px 0}
+.nrg-bar-g{background:linear-gradient(90deg,#16a34a,#22c55e);display:flex;align-items:center;justify-content:center;color:#fff;font-size:10px;font-weight:700;transition:width .6s}
+.nrg-bar-r{background:linear-gradient(90deg,#ef4444,#f87171);display:flex;align-items:center;justify-content:center;color:#fff;font-size:10px;font-weight:700;transition:width .6s}
+.nrg-info{border-radius:12px;padding:14px 18px;margin-bottom:10px;font-size:12.5px;line-height:1.7}
+.nrg-info-g{background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:1px solid #86efac}
+.nrg-info-r{background:linear-gradient(135deg,#fef2f2,#fee2e2);border:1px solid #fca5a5}
+.energy-table{border-collapse:collapse;width:100%;min-width:900px;font-size:11px}
+.energy-table th{padding:8px 4px;text-align:center;font-weight:700;color:#fff;font-size:11px;position:sticky;top:0;z-index:2}
+.energy-table .hour-header{background:var(--accent);width:58px}
+.energy-table td{border-bottom:1px solid var(--border);padding:0}
+.time-cell{padding:5px 6px !important;font-weight:700;text-align:center;font-size:11px;background:var(--s50);color:var(--accent);white-space:nowrap;width:58px}
+.act-input{width:100%;border:none;background:transparent;padding:5px;font-size:11px;outline:none;font-family:inherit;color:var(--txt)}
+.act-input:focus{background:rgba(76,175,80,.06)}
+.cat-select{width:100%;border:none;font-size:10px;padding:5px 2px;background:transparent;cursor:pointer;outline:none;font-family:inherit;font-weight:600;-webkit-appearance:none;appearance:none}
+.cell-goc{background:var(--goc-soft)}.cell-goc .cat-select{color:var(--goc-text)}
+.cell-nhanh{background:var(--nhanh-soft)}.cell-nhanh .cat-select{color:var(--nhanh-text)}
+.cell-doc{background:var(--doc-soft)}.cell-doc .cat-select{color:var(--doc-text)}
+.stats-panel{margin-top:14px;padding:20px;background:var(--card);border-radius:var(--radius);box-shadow:var(--sh);border:2px solid var(--h1)}
+.stats-title{font-size:16px;font-weight:800;text-align:center;color:var(--h1);margin-bottom:16px;font-family:'Playfair Display',serif}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}
+.stat-card{padding:16px 12px;border-radius:10px;text-align:center;transition:transform .2s}
+.stat-card:hover{transform:translateY(-2px)}
+.stat-goc{background:var(--goc-bg);color:var(--goc-text)}.stat-nhanh{background:var(--nhanh-bg);color:var(--nhanh-text)}.stat-doc{background:var(--doc-bg);color:var(--doc-text)}.stat-total{background:var(--s50);color:var(--accent)}
+.stat-card .stat-label{font-size:13px;font-weight:700;margin-bottom:4px}
+.stat-card .stat-number{font-size:28px;font-weight:900;line-height:1.1}
+.stat-card .stat-pct{font-size:18px;font-weight:700;margin:4px 0}
+.stat-card .stat-target{font-size:10px;opacity:.7}
+.goal-banner{margin-top:14px;padding:12px;border-radius:8px;background:var(--goc-soft);text-align:center;font-size:12px;font-weight:700;color:var(--goc-text);border:1px dashed var(--goc-text)}
+.week-nav{display:flex;align-items:center;justify-content:center;gap:16px;padding:12px 16px;background:var(--card);border-bottom:3px solid var(--h1);flex-wrap:wrap}
+.week-nav button{padding:7px 16px;border-radius:8px;border:2px solid var(--h1);background:transparent;color:var(--h1);cursor:pointer;font-weight:700;font-size:12px;font-family:inherit;transition:all .2s}
+.week-nav button:hover{background:var(--h1);color:#fff}
+.week-info{text-align:center}.week-title{font-size:15px;font-weight:800;color:var(--h1)}.week-range{font-size:11px;color:var(--mut);margin-top:2px}
+.view-tabs{display:flex;margin-top:10px}
+.view-tab{flex:1;padding:9px 0;border:none;cursor:pointer;font-weight:700;font-size:12px;font-family:inherit;transition:all .2s}
+.view-tab.active{background:var(--h1);color:#fff}
+.view-tab:not(.active){background:var(--border);color:var(--mut)}
+.view-tab:first-child{border-radius:8px 0 0 0}.view-tab:last-child{border-radius:0 8px 0 0}
+.summary-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:8px}
+.summary-table th{padding:8px 6px;background:var(--h2);color:#fff;text-align:center;font-size:11px;font-weight:700}
+.summary-table td{padding:7px 8px;text-align:center;border-bottom:1px solid var(--border)}
+.summary-table .total-row td{font-weight:800;border-top:2px solid var(--h1)}
+.legend-energy{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0}
+.legend-item{padding:8px 14px;font-size:12px;font-weight:700;display:flex;align-items:center;gap:6px}
+.legend-goc{background:var(--goc-bg);color:var(--goc-text)}.legend-nhanh{background:var(--nhanh-bg);color:var(--nhanh-text)}.legend-doc{background:var(--doc-bg);color:var(--doc-text)}
+.acct-card{background:var(--card);border-radius:12px;padding:14px 16px;box-shadow:var(--sh);margin-bottom:10px;display:flex;align-items:center;gap:12px;justify-content:space-between;flex-wrap:wrap}
+.acct-avatar{width:36px;height:36px;border-radius:50%;background:var(--s200);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:var(--h1)}
+.src-tag{display:inline-block;padding:2px 8px;border-radius:5px;font-size:10px;font-weight:600;background:var(--s100);color:var(--s800);margin:1px 2px}
+.cat-editor{margin-bottom:12px;border:1.5px solid var(--s200);border-radius:10px;overflow:hidden}
+.cat-editor-hdr{background:var(--s50);padding:10px 14px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;user-select:none}
+.cat-editor-hdr:hover{background:var(--s100)}
+.cat-editor-title{font-size:12px;font-weight:700;color:var(--s800)}
+.cat-editor-body{padding:12px 14px}
+.cat-grp{margin-bottom:10px;background:var(--s50);border-radius:8px;padding:8px 10px}
+.cat-grp-name{font-size:11px;font-weight:700;color:var(--s800);margin-bottom:6px;display:flex;align-items:center;gap:6px;justify-content:space-between}
+.cat-grp-name input{font-size:11px;font-weight:700;padding:3px 8px;border:1px solid var(--s200);border-radius:5px;flex:1;max-width:300px}
+.cat-item{display:flex;align-items:center;gap:5px;margin-bottom:3px;padding-left:12px}
+.cat-item input{font-size:11px;padding:3px 8px;border:1px solid var(--s200);border-radius:5px;flex:1;max-width:250px}
+.cat-item .del-btn{font-size:12px}
+.btn-xs{padding:3px 8px;font-size:10px;border-radius:5px;border:none;cursor:pointer;font-family:inherit;font-weight:600}
+.btn-add-item{background:var(--s100);color:var(--s700);margin-left:12px;margin-top:2px}.btn-add-item:hover{background:var(--s200)}
+.btn-add-grp{background:var(--s200);color:var(--s800);margin-top:8px}.btn-add-grp:hover{background:var(--s300)}
+.btn-del-grp{background:#fee2e2;color:#b91c1c}.btn-del-grp:hover{background:#fecaca}
+::-webkit-scrollbar{height:6px;width:6px}::-webkit-scrollbar-thumb{background:var(--s300);border-radius:3px}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}.animate-in{animation:fadeUp .4s ease both}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+// ========== ROLE HIERARCHY ==========
+const ROLES={NPP1:{name:'NPP 1',level:4,canView:['NPP2','VIP','CTV'],badge:'role-npp1'},NPP2:{name:'NPP 2',level:3,canView:['VIP','CTV'],badge:'role-npp2'},VIP:{name:'VIP Hạnh Phúc',level:2,canView:['CTV'],badge:'role-vip'},CTV:{name:'CTV / Hạt Mầm Yêu Thương',level:1,canView:[],badge:'role-ctv'}};
+function getDefaultAccounts(){return[{id:'admin',username:'admin',password:'admin123',name:'Quản Trị Viên',role:'NPP1',parent:null},{id:'npp2_demo',username:'npp2',password:'npp2123',name:'NPP2 Demo',role:'NPP2',parent:'admin'},{id:'vip_demo',username:'vip',password:'vip123',name:'VIP Hạnh Phúc Demo',role:'VIP',parent:'npp2_demo'},{id:'ctv_demo',username:'ctv',password:'ctv123',name:'Hạt Mầm Demo',role:'CTV',parent:'vip_demo'}];}
+function getDefaultConfig(){return{
+appName:'GIEO MẦM HẠNH PHÚC',slogan:'Thịnh Vượng Đủ Đầy · Trong Nhẹ Nhàng Bình An',
+incomeCats:[{grp:"Thu nhập chủ động",items:["Lương chính","Tiền thưởng","Tiền công / Dịch vụ"]},{grp:"Thu nhập thụ động",items:["Cho thuê","Cổ tức","Lợi nhuận đầu tư"]},{grp:"Đầu tư vốn",items:["Lãi chứng khoán","Lãi tiền gửi tiết kiệm","Lãi crypto","Lãi góp vốn kinh doanh"]},{grp:"Thu nhập bất thường",items:["Thu nhập khác"]},{grp:"Đầu tư sản xuất",items:["Kinh doanh"]},{grp:"Đầu tư bất động sản",items:["Quỹ bất động sản"]}],
+expenseCats:[{grp:"Chi thiết yếu",items:["Ăn uống","Nhà ở","Đi lại","Y tế","Giáo dục/ Công việc","Gia hạn gói cước"]},{grp:"Chi không thiết yếu",items:["Mua sắm","Du lịch","Giải trí","Sở thích","Chi tiêu khác"]},{grp:"Chi bất thường",items:["Sửa chữa / bảo trì","Quà tặng / hiếu hỉ"]},{grp:"Chi trả nợ",items:["Nợ tín dụng","Vay cá nhân"]}],
+debtCats:[{grp:"Nợ phải trả",items:["Vay ngân hàng","Thẻ tín dụng","Vay chi tiêu"]},{grp:"Nợ phải thu",items:["Cho mượn tiền","Khách hàng nợ"]}],
+savingCats:[{grp:"Tiết kiệm",items:["Gửi ngân hàng","Quỹ dự phòng"]},{grp:"Đầu tư",items:["Chứng khoán","Bất động sản","Kinh doanh","Vàng/ngoại tệ","Tiền điện tử"]}],
+moneySources:["Tiền mặt","Ngân hàng Vietcombank","Ngân hàng Techcombank","Ngân hàng BIDV","Ngân hàng MB","Ngân hàng ACB","Ngân hàng Sacombank","Ví MoMo","Ví ZaloPay","Nguồn khác"],
+energyCats:[{value:'[G] Nhà 1 - Bản thân',group:'G'},{value:'[G] Nhà 2 - Cha mẹ',group:'G'},{value:'[G] Nhà 3 - Vợ / chồng',group:'G'},{value:'[G] Nhà 4 - Hồn thiêng',group:'G'},{value:'[G] Nhà 5 - Thiên nhiên',group:'G'},{value:'[N] Con cái',group:'N'},{value:'[N] Anh chị em',group:'N'},{value:'[N] Công việc',group:'N'},{value:'[N] Học tập',group:'N'},{value:'[N] Họ hàng / Xã hội',group:'N'},{value:'[D] Mạng XH vô ích',group:'D'},{value:'[D] Tức giận',group:'D'},{value:'[D] Lãng phí',group:'D'},{value:'[D] Trì hoãn',group:'D'},{value:'[D] Thờ ơ',group:'D'},{value:'[D] Rượu bia',group:'D'}],
+sourceGroups:[{name:'PRHOUSE',sources:[]},{name:'SHMT',sources:[]},{name:'Nguồn khác',sources:[]}],
+typeGroups:[{name:'SHMT',items:['SHMT']},{name:'PRHOUSE',items:['PRHOUSE']},{name:'Nguồn khác',items:['AFFILIATE','COACH','APP']}]};}
+
+// ========== STORAGE ==========
+const SKEY_ACCOUNTS='gmhp_accounts',SKEY_CONFIG='gmhp_config';
+function skey(u){return'gmhp_data_'+u;}function ekey(u){return'gmhp_energy_'+u;}
+function loadJSON(k,d){try{const s=localStorage.getItem(k);return s?JSON.parse(s):d;}catch{return d;}}
+function saveJSON(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch{}}
+let accounts=loadJSON(SKEY_ACCOUNTS,null);if(!accounts){accounts=getDefaultAccounts();saveJSON(SKEY_ACCOUNTS,accounts);}
+let config=loadJSON(SKEY_CONFIG,null);if(!config){config=getDefaultConfig();saveJSON(SKEY_CONFIG,config);}
+let currentUser=null,D={incomes:[],expenses:[],debts:[],savings:[],targets:[],balances:[],debtmap:[]},energyAllWeeks={};
+
+function loadUserData(){if(!currentUser)return;D=loadJSON(skey(currentUser.id),{incomes:[],expenses:[],debts:[],savings:[],targets:[],balances:[],debtmap:[]});energyAllWeeks={};for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(k.startsWith(ekey(currentUser.id)+'_')){try{energyAllWeeks[k.slice((ekey(currentUser.id)+'_').length)]=JSON.parse(localStorage.getItem(k));}catch{}}}}
+function saveUserData(){if(!currentUser)return;saveJSON(skey(currentUser.id),D);}
+function saveEnergyWeek(wk,data){if(!currentUser)return;localStorage.setItem(ekey(currentUser.id)+'_'+wk,JSON.stringify(data));energyAllWeeks[wk]=data;}
+
+// ========== UTILS ==========
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+const NV=v=>Number(v)||0;
+const fmt=v=>Math.round(NV(v)).toLocaleString("vi-VN");
+const fmtS=v=>{const a=Math.abs(NV(v));if(a>=1e9)return(NV(v)/1e9).toFixed(1)+"B";if(a>=1e6)return(NV(v)/1e6).toFixed(1)+"M";if(a>=1e3)return(NV(v)/1e3).toFixed(0)+"K";return fmt(v);};
+const dmy=d=>{if(!d)return"—";const x=new Date(d);return`${String(x.getDate()).padStart(2,"0")}/${String(x.getMonth()+1).padStart(2,"0")}/${x.getFullYear()}`;};
+const findGrp=(cats,name)=>{for(const g of cats)if(g.items.includes(name))return g.grp;return"";};
+const sum=(arr,key="amount")=>arr.reduce((s,r)=>s+NV(r[key]),0);
+const grpBy=(arr,key)=>{const m={};arr.forEach(r=>{m[r[key]]=(m[r[key]]||0)+NV(r.amount);});return Object.entries(m).map(([name,value])=>({name,value})).sort((a,b)=>b.value-a.value);};
+const catOpts=cats=>`<option value="">— Chọn —</option>`+cats.map(g=>`<optgroup label="${g.grp}">${g.items.map(i=>`<option value="${i}">${i}</option>`).join("")}</optgroup>`).join("");
+const srcOpts=()=>`<option value="">— Nguồn —</option>`+config.moneySources.map(s=>`<option value="${s}">${s}</option>`).join("");
+const nrgTag=e=>e==="Xanh"?`<span class="nrg nrg-green">☘️ Xanh</span>`:e==="Đỏ"?`<span class="nrg nrg-red">🔴 Đỏ</span>`:`<span class="nrg" style="background:var(--s100);color:var(--s700)">⚪ —</span>`;
+function nrgBarHTML(g,r){const t=g+r;if(!t)return"";const gP=(g/t*100).toFixed(0),rP=(r/t*100).toFixed(0);return`<div class="nrg-bar"><div class="nrg-bar-g" style="width:${gP}%">☘️${gP}%</div><div class="nrg-bar-r" style="width:${rP}%">🔴${rP}%</div></div>`;}
+const COLORS=["#1B5E20","#0369a1","#7c3aed","#c2410c","#0891b2","#be185d","#ca8a04","#4338ca","#15803d","#dc2626"];
+const COLORS2=["#ef4444","#0284c7","#7c3aed","#ea580c","#0d9488","#db2777","#ca8a04","#6366f1","#16a34a","#f472b6"];
+const TGT_GROUPS=["Thu nhập","Chi tiêu","Công nợ","Tiết kiệm/ Đầu tư"];
+const TIEN_XANH=`<strong>🌿 Tiền Xanh (Năng lượng Dương):</strong> Tiền thu về trong sự đồng thuận, vui vẻ. Tiền chi ra mang lại giá trị thực (vd: mua xe tải giúp gia đình kinh doanh phát triển).`;
+const TIEN_DO=`<strong>🔴 Tiền Đỏ (Năng lượng Âm):</strong> Tiền thu về từ mâu thuẫn. Tiền chi ra để khoe khoang bản ngã, tiêu sản vô minh.`;
+function makePie(data,colors,size=160){if(!data.length||data.every(d=>d.value===0))return`<div style="text-align:center;color:var(--mut);font-size:12px;padding:16px">Chưa có dữ liệu</div>`;const total=data.reduce((s,d)=>s+d.value,0);let acc=0;const stops=[];data.forEach((d,i)=>{const p=d.value/total*100;stops.push(`${colors[i%colors.length]} ${acc}% ${acc+p}%`);acc+=p;});const legend=data.filter(d=>d.value>0).map((d,i)=>`<span><i style="background:${colors[i%colors.length]}"></i>${d.name}: ${fmtS(d.value)}</span>`).join("");return`<div class="pie-wrap"><div class="pie" style="width:${size}px;height:${size}px;background:conic-gradient(${stops.join(",")})"><div class="pie-center">${fmtS(total)}</div></div><div class="legend-pie">${legend}</div></div>`;}
+
+// Energy helpers
+const DAYS=['Thứ Hai','Thứ Ba','Thứ Tư','Thứ Năm','Thứ Sáu','Thứ Bảy','Chủ Nhật'];
+const HOURS=Array.from({length:24},(_,i)=>String(i).padStart(2,'0')+':00');
+function getMonday(d){const dt=new Date(d);const day=dt.getDay();dt.setDate(dt.getDate()-day+(day===0?-6:1));dt.setHours(0,0,0,0);return dt;}
+function fmtD(d){return String(d.getDate()).padStart(2,'0')+'/'+String(d.getMonth()+1).padStart(2,'0');}
+function weekNum(d){const dt=new Date(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate()));const dn=dt.getUTCDay()||7;dt.setUTCDate(dt.getUTCDate()+4-dn);const y1=new Date(Date.UTC(dt.getUTCFullYear(),0,1));return Math.ceil(((dt-y1)/864e5+1)/7);}
+function wKey(mon){return mon.getFullYear()+'-W'+String(weekNum(mon)).padStart(2,'0');}
+function mKey(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');}
+function getGroup(c){return c?.startsWith('[G]')?'G':c?.startsWith('[N]')?'N':c?.startsWith('[D]')?'D':'';}
+function emptyWeek(){const d={};for(let day=0;day<7;day++)for(let h=0;h<24;h++)d[day+'-'+h]={a:'',c:''};return d;}
+function escHtml(s){if(!s)return'';return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function calcEnergyStats(data){let g=0,n=0,d=0,total=0;Object.values(data).forEach(cell=>{if(!cell?.c)return;total++;const gr=getGroup(cell.c);if(gr==='G')g++;else if(gr==='N')n++;else if(gr==='D')d++;});return{g,n,d,total};}
+function energyStats(F){const all=[...F.incomes,...F.expenses];const gA=all.filter(r=>r.energy==="Xanh"),rA=all.filter(r=>r.energy==="Đỏ");return{greenCount:gA.length,redCount:rA.length,totalCount:all.length,greenAmt:sum(gA),redAmt:sum(rA),greenIncAmt:sum(F.incomes.filter(r=>r.energy==="Xanh")),redIncAmt:sum(F.incomes.filter(r=>r.energy==="Đỏ")),greenExpAmt:sum(F.expenses.filter(r=>r.energy==="Xanh")),redExpAmt:sum(F.expenses.filter(r=>r.energy==="Đỏ")),greenIncCount:F.incomes.filter(r=>r.energy==="Xanh").length,redIncCount:F.incomes.filter(r=>r.energy==="Đỏ").length,greenExpCount:F.expenses.filter(r=>r.energy==="Xanh").length,redExpCount:F.expenses.filter(r=>r.energy==="Đỏ").length};}
+
+// ========== APP STATE ==========
+let currentTab='energy_week',dateFrom='',dateTo='',energyMonday=getMonday(new Date()),energyWeekData=emptyWeek(),energyView='week';
+function filteredData(){const a=dateFrom?new Date(dateFrom):null,b=dateTo?new Date(dateTo):null;const flt=arr=>arr.filter(r=>{if(!r.date)return true;const d=new Date(r.date);return(!a||d>=a)&&(!b||d<=b);});return{incomes:flt(D.incomes),expenses:flt(D.expenses),debts:flt(D.debts),savings:flt(D.savings)};}
+function addRow(k,row){D[k].push({...row,id:uid()});saveUserData();render();}
+function delRow(k,id){if(!confirm('Xoá dòng này?'))return;D[k]=D[k].filter(r=>r.id!==id);saveUserData();render();}
+function editRow(tabId,dataKey,id){
+  const row=D[dataKey].find(r=>r.id===id);if(!row)return;
+  const el=k=>document.getElementById(tabId+'_'+k);
+  if(el('date'))el('date').value=row.date||'';
+  if(el('amt'))el('amt').value=row.amount||'';
+  if(el('type'))el('type').value=row.type||'';
+  if(el('grp'))el('grp').value=row.grp||'';
+  if(el('source'))el('source').value=row.source||'';
+  if(el('energy'))el('energy').value=row.energy||'';
+  if(el('suviec'))el('suviec').value=row.suviec||'';
+  if(el('camxuc'))el('camxuc').value=row.camxuc||'';
+  if(el('note'))el('note').value=row.note||'';
+  if(el('risk'))el('risk').value=row.risk||'An toàn';
+  // Remove old row, user will re-add with updated data
+  D[dataKey]=D[dataKey].filter(r=>r.id!==id);saveUserData();
+  // Scroll to form
+  const form=document.getElementById('tab-'+tabId);if(form)form.scrollIntoView({behavior:'smooth'});
+  render();
+}
+function loadEnergyWeek(mon){energyMonday=mon;energyWeekData=energyAllWeeks[wKey(mon)]||emptyWeek();}
+function editDebtMap(id){
+  const row=D.debtmap.find(r=>r.id===id);if(!row)return;
+  const el=k=>document.getElementById('dm_'+k);
+  if(el('ten'))el('ten').value=row.ten||'';
+  if(el('goc'))el('goc').value=row.goc||'';
+  if(el('lai'))el('lai').value=row.lai||'';
+  if(el('tysuat'))el('tysuat').value=row.tysuat||'';
+  if(el('mausac'))el('mausac').value=row.mausac||'Xanh';
+  if(el('note'))el('note').value=row.note||'';
+  D.debtmap=D.debtmap.filter(r=>r.id!==id);saveUserData();render();
+}
+function editTarget(id){
+  const row=D.targets.find(r=>r.id===id);if(!row)return;
+  const el=k=>document.getElementById('tgt_'+k);
+  if(el('grp'))el('grp').value=row.group||'';
+  if(el('name'))el('name').value=row.name||'';
+  if(el('amt'))el('amt').value=row.amount||'';
+  if(el('period'))el('period').value=row.period||'';
+  if(el('note'))el('note').value=row.note||'';
+  D.targets=D.targets.filter(r=>r.id!==id);saveUserData();render();
+}
+function editBalance(id){
+  const row=D.balances.find(r=>r.id===id);if(!row)return;
+  const el=k=>document.getElementById('bal_'+k);
+  if(el('src'))el('src').value=row.source||'';
+  if(el('amt'))el('amt').value=row.amount||'';
+  if(el('date'))el('date').value=row.date||'';
+  if(el('note'))el('note').value=row.note||'';
+  D.balances=D.balances.filter(r=>r.id!==id);saveUserData();render();
+}
+
+// ========== LOGIN ==========
+function renderLogin(){document.getElementById('root').innerHTML=`<div class="login-wrap"><div class="login-box animate-in"><div style="font-size:40px;margin-bottom:8px">🌿</div><h1>GIEO MẦM HẠNH PHÚC</h1><p>Quản Lý Tài Chính & Năng Lượng Cá Nhân</p><div class="field"><label>Tên đăng nhập</label><input type="text" id="loginUser" placeholder="Nhập tên đăng nhập"></div><div class="field"><label>Mật khẩu</label><input type="password" id="loginPass" placeholder="Nhập mật khẩu"></div><button class="login-btn" onclick="doLogin()">🔐 Đăng Nhập</button><div class="login-msg" id="loginMsg"></div><div style="margin-top:16px;padding-top:12px;border-top:1px solid var(--s100);font-size:10px;color:var(--mut)"><strong>Tài khoản mặc định:</strong><br>NPP1: admin / admin123 · NPP2: npp2 / npp2123<br>VIP: vip / vip123 · CTV: ctv / ctv123</div></div></div>`;document.getElementById('loginUser').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});document.getElementById('loginPass').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});}
+function doLogin(){const u=document.getElementById('loginUser').value.trim(),p=document.getElementById('loginPass').value;const acct=accounts.find(a=>a.username===u&&a.password===p);if(!acct){document.getElementById('loginMsg').textContent='❌ Sai tên đăng nhập hoặc mật khẩu';return;}currentUser=acct;loadUserData();loadEnergyWeek(energyMonday);currentTab='energy_week';renderApp();}
+function doLogout(){currentUser=null;D={incomes:[],expenses:[],debts:[],savings:[],targets:[],balances:[],debtmap:[]};renderLogin();}
+
+// ========== MAIN APP ==========
+function renderApp(){
+  const role=ROLES[currentUser.role],canMA=role.level>=3,canVT=role.canView.length>0;
+  let t=`<button class="${currentTab==='energy_week'?'on':''}" data-tab="energy_week">⏰ NL Tuần</button><button class="${currentTab==='overview'?'on':''}" data-tab="overview">📊 Tổng quan</button><button class="${currentTab==='income'?'on':''}" data-tab="income">💰 Thu nhập</button><button class="${currentTab==='expense'?'on':''}" data-tab="expense">💸 Chi tiêu</button><button class="${currentTab==='debt'?'on':''}" data-tab="debt">📋 Công nợ</button><button class="${currentTab==='saving'?'on':''}" data-tab="saving">📈 TK & ĐT</button><button class="${currentTab==='debtmap'?'on':''}" data-tab="debtmap">🔬 Giải phẫu nợ</button><button class="${currentTab==='energy_money'?'on':''}" data-tab="energy_money">🌿 NL Tiền</button><button class="${currentTab==='target'?'on':''}" data-tab="target">🎯 Mục tiêu</button><button class="${currentTab==='balance'?'on':''}" data-tab="balance">🏦 Số dư</button>`;
+  if(canVT)t+=`<button class="${currentTab==='team'?'on':''}" data-tab="team">👥 Đội nhóm</button>`;
+  if(canMA)t+=`<button class="${currentTab==='accounts'?'on':''}" data-tab="accounts">🔑 Tài khoản</button>`;
+  t+=`<button class="${currentTab==='settings'?'on':''}" data-tab="settings">⚙️ Cài đặt</button>`;
+  document.getElementById('root').innerHTML=`<div class="app"><div class="main-hdr animate-in"><h1>🌿 ${config.appName}</h1><p>${config.slogan}</p><div class="hdr-bar"><div class="hdr-user">👤 ${currentUser.name} <span class="role-badge ${role.badge}">${role.name}</span></div><button class="logout-btn" onclick="doLogout()">🚪 Đăng xuất</button></div></div><div class="tabs"><div id="tabBar">${t}</div></div><div class="body"><div class="tab-content ${currentTab==='energy_week'?'active':''}" id="tab-energy_week"></div><div class="tab-content ${currentTab==='overview'?'active':''}" id="tab-overview"></div><div class="tab-content ${currentTab==='income'?'active':''}" id="tab-income"></div><div class="tab-content ${currentTab==='expense'?'active':''}" id="tab-expense"></div><div class="tab-content ${currentTab==='debt'?'active':''}" id="tab-debt"></div><div class="tab-content ${currentTab==='saving'?'active':''}" id="tab-saving"></div><div class="tab-content ${currentTab==='debtmap'?'active':''}" id="tab-debtmap"></div><div class="tab-content ${currentTab==='energy_money'?'active':''}" id="tab-energy_money"></div><div class="tab-content ${currentTab==='target'?'active':''}" id="tab-target"></div><div class="tab-content ${currentTab==='balance'?'active':''}" id="tab-balance"></div>${canVT?`<div class="tab-content ${currentTab==='team'?'active':''}" id="tab-team"></div>`:''}${canMA?`<div class="tab-content ${currentTab==='accounts'?'active':''}" id="tab-accounts"></div>`:''}<div class="tab-content ${currentTab==='settings'?'active':''}" id="tab-settings"></div></div><div class="footer">🌱 ${config.appName} · ${config.slogan}</div></div>`;
+  document.getElementById('tabBar').addEventListener('click',e=>{if(e.target.tagName!=='BUTTON')return;currentTab=e.target.dataset.tab;document.querySelectorAll('.tabs button').forEach(b=>b.classList.toggle('on',b.dataset.tab===currentTab));document.querySelectorAll('.tab-content').forEach(el=>el.classList.toggle('active',el.id==='tab-'+currentTab));render();});
+  render();
+}
+
+function render(){
+  if(!currentUser)return;const F=filteredData();
+  const ti=sum(F.incomes),te=sum(F.expenses);
+  const dp=sum(F.debts.filter(r=>findGrp(config.debtCats,r.type)==="Nợ phải trả"||r.grp==="Nợ phải trả"));
+  const dr=sum(F.debts.filter(r=>findGrp(config.debtCats,r.type)==="Nợ phải thu"||r.grp==="Nợ phải thu"));
+  const ts=sum(F.savings),remain=ti-te-dp-ts;
+  const E=energyStats(F),S={ti,te,dp,dr,ts,remain,E};
+  if(currentTab==='energy_week')renderEnergyWeek();
+  else if(currentTab==='overview')renderOverview(F,S,E);
+  else if(currentTab==='income')renderEntry("income","💰 THẺ THU NHẬP","incomes",config.incomeCats,D.incomes,F.incomes,"var(--ok)");
+  else if(currentTab==='expense')renderEntry("expense","💸 THẺ CHI TIÊU","expenses",config.expenseCats,D.expenses,F.expenses,"var(--no)");
+  else if(currentTab==='debt')renderEntryDebt();
+  else if(currentTab==='saving')renderEntry("saving","📈 THẺ TIẾT KIỆM & ĐẦU TƯ","savings",config.savingCats,D.savings,F.savings,"var(--s700)",true);
+  else if(currentTab==='debtmap')renderDebtMap();
+  else if(currentTab==='energy_money')renderEnergyMoney(F,E);
+  else if(currentTab==='target')renderTarget();
+  else if(currentTab==='balance')renderBalance();
+  else if(currentTab==='team')renderTeam();
+  else if(currentTab==='accounts')renderAccounts();
+  else if(currentTab==='settings')renderSettings();
+}
+
+// ========== OVERVIEW ==========
+function renderOverview(F,S,E){
+  const incByCat=grpBy(F.incomes,"type"),expByCat=grpBy(F.expenses,"type");
+  const tgI=sum(D.targets.filter(r=>r.group==="Thu nhập")),tgE=sum(D.targets.filter(r=>r.group==="Chi tiêu")),tgS=sum(D.targets.filter(r=>r.group==="Tiết kiệm/ Đầu tư"));
+  document.getElementById("tab-overview").innerHTML=`
+    <div class="form-row" style="margin-bottom:14px"><div class="field" style="min-width:140px;flex:unset"><label>Từ ngày</label><input type="date" id="dfFrom" value="${dateFrom}"></div><div class="field" style="min-width:140px;flex:unset"><label>Đến ngày</label><input type="date" id="dfTo" value="${dateTo}"></div>${(dateFrom||dateTo)?'<button class="btn btn-light" onclick="dateFrom=\'\';dateTo=\'\';render()" style="margin-bottom:1px">✕ Xoá lọc</button>':''}</div>
+    <div class="g2" style="margin-bottom:14px"><div class="nrg-info nrg-info-g">${TIEN_XANH}</div><div class="nrg-info nrg-info-r">${TIEN_DO}</div></div>
+    <div class="stats">
+      <div class="stat" style="border-left-color:var(--ok)"><div class="stat-l">💰 Tổng thu nhập</div><div class="stat-v">${fmt(S.ti)}</div><div class="stat-s">${tgI?'×'+(S.ti/tgI).toFixed(1)+' mục tiêu':'—'}</div></div>
+      <div class="stat" style="border-left-color:var(--no)"><div class="stat-l">💸 Tổng chi phí</div><div class="stat-v">${fmt(S.te)}</div><div class="stat-s">${tgE?'×'+(S.te/tgE).toFixed(1)+' ngân sách':'—'}</div></div>
+      <div class="stat" style="border-left-color:var(--warn)"><div class="stat-l">📋 Công nợ phải trả</div><div class="stat-v">${fmt(S.dp)}</div><div class="stat-s">Phải thu: ${fmtS(S.dr)}</div></div>
+      <div class="stat" style="border-left-color:var(--s500)"><div class="stat-l">📈 TK & ĐT</div><div class="stat-v">${fmt(S.ts)}</div><div class="stat-s">${tgS?'×'+(S.ts/tgS).toFixed(1)+' mục tiêu':'—'}</div></div>
+      <div class="stat" style="border-left-color:${S.remain>=0?'var(--ok)':'var(--no)'}"><div class="stat-l">💎 TIỀN CÒN LẠI</div><div class="stat-v" style="color:${S.remain>=0?'var(--ok)':'var(--no)'}">${fmt(S.remain)}</div><div class="stat-s">= Thu nhập − Chi phí − Nợ − TK&ĐT</div></div>
+      <div class="stat" style="border-left-color:var(--green-e)"><div class="stat-l">🌿 Năng lượng tiền</div><div class="stat-v" style="font-size:13px">☘️${fmtS(E.greenAmt)} &nbsp; 🔴${fmtS(E.redAmt)}</div>${nrgBarHTML(E.greenAmt,E.redAmt)}</div>
+    </div>
+    <div class="card" style="background:linear-gradient(135deg,var(--s50),#f0fdf4);border:2px solid var(--s300)"><div style="text-align:center;font-size:12px;font-weight:700;color:var(--s900);margin-bottom:8px">📐 CÔNG THỨC TIỀN CÒN LẠI</div><div style="text-align:center;font-size:14px;font-weight:800;color:var(--h1)"><span style="color:var(--ok)">${fmtS(S.ti)}</span><span style="color:var(--mut)"> − </span><span style="color:var(--no)">${fmtS(S.te)}</span><span style="color:var(--mut)"> − </span><span style="color:var(--warn)">${fmtS(S.dp)}</span><span style="color:var(--mut)"> − </span><span style="color:var(--s700)">${fmtS(S.ts)}</span><span style="color:var(--mut)"> = </span><span style="color:${S.remain>=0?'var(--ok)':'var(--no)'}; font-size:18px">${fmtS(S.remain)}</span></div><div style="text-align:center;font-size:10px;color:var(--mut);margin-top:4px">Thu nhập − Chi phí − Công nợ phải trả − Tiết kiệm & Đầu tư</div></div>
+    <div class="g2"><div class="card"><div class="card-t">💰 Cơ cấu thu nhập</div>${makePie(incByCat,COLORS,160)}</div><div class="card"><div class="card-t">💸 Cơ cấu chi tiêu</div>${makePie(expByCat,COLORS2,160)}</div></div>
+    ${buildSourceReport(F)}`;
+  const dfF=document.getElementById("dfFrom"),dfT=document.getElementById("dfTo");
+  if(dfF)dfF.addEventListener("change",e=>{dateFrom=e.target.value;render();});
+  if(dfT)dfT.addEventListener("change",e=>{dateTo=e.target.value;render();});
+}
+function buildSourceReport(F){
+  const typeGroups=config.typeGroups||[];
+  // Group by "type" field (SHMT, PRHOUSE, AFFILIATE KHOÁ HỌC, etc.)
+  function getTypeGroup(type){
+    if(!type)return'Khác';
+    for(const tg of typeGroups){if(tg.items.some(item=>type.toUpperCase().includes(item.toUpperCase())))return tg.name;}
+    return type;
+  }
+  const incByGroup={},expByGroup={};
+  F.incomes.forEach(r=>{const g=getTypeGroup(r.type);incByGroup[g]=(incByGroup[g]||0)+NV(r.amount);});
+  F.expenses.forEach(r=>{const g=getTypeGroup(r.type);expByGroup[g]=(expByGroup[g]||0)+NV(r.amount);});
+  const allGroups=[...new Set([...Object.keys(incByGroup),...Object.keys(expByGroup)])].sort();
+  if(!allGroups.length)return'';
+  const totalInc=Object.values(incByGroup).reduce((a,b)=>a+b,0);
+  const totalExp=Object.values(expByGroup).reduce((a,b)=>a+b,0);
+  let rows=allGroups.map(g=>{const inc=incByGroup[g]||0;const exp=expByGroup[g]||0;const net=inc-exp;const pctI=totalInc?(inc/totalInc*100).toFixed(1):0;const pctE=totalExp?(exp/totalExp*100).toFixed(1):0;return`<tr><td class="b">${g}</td><td class="r c-ok">${fmt(inc)}</td><td class="r" style="font-size:10px;color:var(--mut)">${pctI}%</td><td class="r c-no">${fmt(exp)}</td><td class="r" style="font-size:10px;color:var(--mut)">${pctE}%</td><td class="r b" style="color:${net>=0?'var(--ok)':'var(--no)'}">${fmt(net)}</td></tr>`;}).join('');
+  rows+=`<tr style="background:var(--s50);font-weight:800"><td>TỔNG</td><td class="r c-ok">${fmt(totalInc)}</td><td class="r">100%</td><td class="r c-no">${fmt(totalExp)}</td><td class="r">100%</td><td class="r" style="color:${totalInc-totalExp>=0?'var(--ok)':'var(--no)'}">${fmt(totalInc-totalExp)}</td></tr>`;
+  const incSrcData=Object.entries(incByGroup).map(([name,value])=>({name,value})).sort((a,b)=>b.value-a.value);
+  const expSrcData=Object.entries(expByGroup).map(([name,value])=>({name,value})).sort((a,b)=>b.value-a.value);
+  return`<div class="card"><div class="card-t">📊 BÁO CÁO THEO NGUỒN THU / CHI</div><p style="font-size:11px;color:var(--mut);margin-bottom:10px">Phân tích theo loại nguồn (SHMT, PRHOUSE, AFFILIATE...). Cấu hình nhóm trong ⚙️ Cài đặt → "Nhóm nguồn báo cáo".</p><div style="overflow-x:auto"><table><thead><tr><th>Nguồn</th><th class="r">Thu nhập</th><th class="r">% Thu</th><th class="r">Chi tiêu</th><th class="r">% Chi</th><th class="r">Chênh lệch</th></tr></thead><tbody>${rows}</tbody></table></div></div>`;
+}
+
+// ========== ENTRY TABS ==========
+function grpOpts(cats){return`<option value="">— Danh mục —</option>`+cats.map(g=>`<option value="${g.grp}">${g.grp}</option>`).join("");}
+function renderEntry(tabId,title,dataKey,cats,allRows,filtRows,color,riskMode){
+  const total=sum(filtRows);const el=document.getElementById("tab-"+tabId);
+  let riskField=riskMode?`<div class="field"><label>Mức rủi ro</label><select id="${tabId}_risk"><option>An toàn</option><option>Rủi ro</option></select></div>`:"";
+  let tableRows=allRows.map(r=>`<tr><td>${dmy(r.date)}</td><td>${r.type||""}</td><td>${r.grp||""}</td>${riskMode?`<td class="${r.risk==="Rủi ro"?"c-warn":"c-ok"}">${r.risk||""}</td>`:""}<td class="r b">${fmt(r.amount)}</td><td><span class="src-tag">${r.source||"—"}</span></td><td>${nrgTag(r.energy)}</td><td style="font-size:10px;max-width:100px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${r.suviec||""}</td><td style="font-size:10px">${r.camxuc||""}</td><td style="font-size:10px">${r.note||""}</td><td style="white-space:nowrap"><button class="del-btn" style="color:var(--s700)" title="Sửa" onclick="editRow('${tabId}','${dataKey}','${r.id}')">✏️</button><button class="del-btn" title="Xoá" onclick="delRow('${dataKey}','${r.id}')">🗑️</button></td></tr>`).join("");
+  el.innerHTML=`<div class="card"><div class="card-t">${title}</div><div class="g2" style="margin-bottom:12px"><div class="nrg-info nrg-info-g">${TIEN_XANH}</div><div class="nrg-info nrg-info-r">${TIEN_DO}</div></div><div class="form-row"><div class="field"><label>Ngày</label><input type="date" id="${tabId}_date"></div><div class="field"><label>Số tiền</label><input type="number" id="${tabId}_amt" placeholder="0"></div><div class="field"><label>Loại</label><input type="text" id="${tabId}_type" placeholder="VD: SHMT, Affiliate..." list="${tabId}_typelist"><datalist id="${tabId}_typelist">${cats.flatMap(g=>g.items).map(i=>`<option value="${i}">`).join('')}</datalist></div><div class="field"><label>Danh mục</label><select id="${tabId}_grp">${grpOpts(cats)}</select></div><div class="field"><label>Nguồn tiền</label><select id="${tabId}_source">${srcOpts()}</select></div>${riskField}<div class="field" style="min-width:90px"><label>Năng lượng</label><select id="${tabId}_energy"><option value="">— Chọn —</option><option value="Xanh">☘️ Xanh</option><option value="Đỏ">🔴 Đỏ</option></select></div><div class="field"><label>Sự việc</label><input type="text" id="${tabId}_suviec" placeholder="Mô tả..."></div><div class="field"><label>Cảm xúc</label><input type="text" id="${tabId}_camxuc" placeholder="Cảm xúc..."></div><div class="field"><label>Ghi chú</label><input type="text" id="${tabId}_note"></div><div style="padding-bottom:1px"><button class="btn" id="${tabId}_add">+ Thêm</button></div></div></div><div class="card"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:6px"><div class="card-t" style="margin:0">Danh sách (${allRows.length})</div><div style="font-size:13px;font-weight:700;color:${color}">Tổng: ${fmt(total)}</div></div>${allRows.length?`<div style="overflow-x:auto"><table><thead><tr><th>Ngày</th><th>Loại</th><th>Danh mục</th>${riskMode?"<th>Rủi ro</th>":""}<th class="r">Số tiền</th><th>Nguồn</th><th>NL</th><th>Sự việc</th><th>Cảm xúc</th><th>Ghi chú</th><th style="width:28px"></th></tr></thead><tbody>${tableRows}</tbody></table></div>`:'<div style="text-align:center;padding:28px;color:var(--mut)">Chưa có dữ liệu</div>'}</div>`;
+  // Auto-select group when typing a known item
+  const typeEl=document.getElementById(tabId+"_type"),grpEl=document.getElementById(tabId+"_grp");
+  if(typeEl&&grpEl){typeEl.addEventListener("input",()=>{const g=findGrp(cats,typeEl.value);if(g)grpEl.value=g;});}
+  document.getElementById(tabId+"_add").addEventListener("click",()=>{const date=document.getElementById(tabId+"_date").value,amount=document.getElementById(tabId+"_amt").value,type=document.getElementById(tabId+"_type").value,grp=document.getElementById(tabId+"_grp").value,source=document.getElementById(tabId+"_source").value,note=document.getElementById(tabId+"_note").value,energy=document.getElementById(tabId+"_energy").value,suviec=document.getElementById(tabId+"_suviec").value,camxuc=document.getElementById(tabId+"_camxuc").value,risk=riskMode?document.getElementById(tabId+"_risk").value:"An toàn";if(!date||!amount||!type)return alert("Vui lòng nhập Ngày, Số tiền và Loại");addRow(dataKey,{date,amount,type,grp:grp||findGrp(cats,type),risk,energy,source,suviec,camxuc,note});});
+}
+
+function renderEntryDebt(){
+  const allRows=D.debts;const el=document.getElementById("tab-debt");
+  let tableRows=allRows.map(r=>{const cc=r.grp==="Nợ phải trả"?"c-no":"c-ok";return`<tr><td>${dmy(r.date)}</td><td>${r.type||""}</td><td class="${cc}">${r.grp||""}</td><td class="r b ${cc}">${fmt(r.amount)}</td><td><span class="src-tag">${r.source||"—"}</span></td><td>${nrgTag(r.energy)}</td><td style="font-size:10px">${r.suviec||""}</td><td style="font-size:10px">${r.camxuc||""}</td><td style="font-size:10px">${r.note||""}</td><td style="white-space:nowrap"><button class="del-btn" style="color:var(--s700)" title="Sửa" onclick="editRow('debt','debts','${r.id}')">✏️</button><button class="del-btn" title="Xoá" onclick="delRow('debts','${r.id}')">🗑️</button></td></tr>`;}).join("");
+  el.innerHTML=`<div class="card"><div class="card-t">📋 THẺ NỢ</div><div class="g2" style="margin-bottom:12px"><div class="nrg-info nrg-info-g">${TIEN_XANH}</div><div class="nrg-info nrg-info-r">${TIEN_DO}</div></div><div class="form-row"><div class="field"><label>Ngày</label><input type="date" id="debt_date"></div><div class="field"><label>Số tiền</label><input type="number" id="debt_amt" placeholder="0"></div><div class="field"><label>Loại nợ</label><input type="text" id="debt_type" placeholder="VD: Vay mua nhà..." list="debt_typelist"><datalist id="debt_typelist">${config.debtCats.flatMap(g=>g.items).map(i=>`<option value="${i}">`).join('')}</datalist></div><div class="field"><label>Danh mục</label><select id="debt_grp">${grpOpts(config.debtCats)}</select></div><div class="field"><label>Nguồn tiền</label><select id="debt_source">${srcOpts()}</select></div><div class="field" style="min-width:90px"><label>Năng lượng</label><select id="debt_energy"><option value="">— Chọn —</option><option value="Xanh">☘️ Xanh</option><option value="Đỏ">🔴 Đỏ</option></select></div><div class="field"><label>Sự việc</label><input type="text" id="debt_suviec"></div><div class="field"><label>Cảm xúc</label><input type="text" id="debt_camxuc"></div><div class="field"><label>Ghi chú</label><input type="text" id="debt_note"></div><div style="padding-bottom:1px"><button class="btn" id="debt_add">+ Thêm</button></div></div></div><div class="card"><div class="card-t">Danh sách (${allRows.length})</div>${allRows.length?`<div style="overflow-x:auto"><table><thead><tr><th>Ngày</th><th>Loại</th><th>Danh mục</th><th class="r">Số tiền</th><th>Nguồn</th><th>NL</th><th>Sự việc</th><th>Cảm xúc</th><th>Ghi chú</th><th style="width:28px"></th></tr></thead><tbody>${tableRows}</tbody></table></div>`:'<div style="text-align:center;padding:28px;color:var(--mut)">Chưa có dữ liệu</div>'}</div>`;
+  const dtType=document.getElementById("debt_type"),dtGrp=document.getElementById("debt_grp");
+  if(dtType&&dtGrp){dtType.addEventListener("input",()=>{const g=findGrp(config.debtCats,dtType.value);if(g)dtGrp.value=g;});}
+  document.getElementById("debt_add").addEventListener("click",()=>{const date=document.getElementById("debt_date").value,amount=document.getElementById("debt_amt").value,type=document.getElementById("debt_type").value,grp=document.getElementById("debt_grp").value,source=document.getElementById("debt_source").value,energy=document.getElementById("debt_energy").value,suviec=document.getElementById("debt_suviec").value,camxuc=document.getElementById("debt_camxuc").value,note=document.getElementById("debt_note").value;if(!date||!amount||!type)return alert("Vui lòng nhập Ngày, Số tiền và Loại");addRow("debts",{date,amount,type,grp:grp||findGrp(config.debtCats,type),energy,source,suviec,camxuc,note});});
+}
+
+function renderDebtMap(){
+  const el=document.getElementById("tab-debtmap");
+  let rows=D.debtmap.map(r=>{const mau=r.mausac==="Xanh"?"nrg-green":"nrg-red";return`<tr><td class="b">${r.ten||""}</td><td class="r">${fmt(r.goc)}</td><td class="r">${fmt(r.lai)}</td><td class="r b">${fmt(NV(r.goc)+NV(r.lai))}</td><td class="r">${r.tysuat||""}%</td><td><span class="nrg ${mau}">${r.mausac==="Xanh"?"☘️ Xanh":"🔴 Đỏ"}</span></td><td style="font-size:10px">${r.note||""}</td><td style="white-space:nowrap"><button class="del-btn" style="color:var(--s700)" title="Sửa" onclick="editDebtMap('${r.id}')">✏️</button><button class="del-btn" title="Xoá" onclick="delRow('debtmap','${r.id}')">🗑️</button></td></tr>`;}).join("");
+  const greenD=D.debtmap.filter(r=>r.mausac==="Xanh"),redD=D.debtmap.filter(r=>r.mausac==="Đỏ");
+  const gT=greenD.reduce((s,r)=>s+NV(r.goc)+NV(r.lai),0),rT=redD.reduce((s,r)=>s+NV(r.goc)+NV(r.lai),0);
+  el.innerHTML=`<div class="card"><div class="card-t">🔬 BẢNG GIẢI PHẪU NỢ</div><div class="g2" style="margin-bottom:12px"><div class="nrg-info nrg-info-g">${TIEN_XANH}</div><div class="nrg-info nrg-info-r">${TIEN_DO}</div></div><div class="form-row"><div class="field"><label>Tên khoản nợ</label><input type="text" id="dm_ten" placeholder="VD: Vay mua nhà..."></div><div class="field"><label>Gốc</label><input type="number" id="dm_goc" placeholder="0"></div><div class="field"><label>Lãi</label><input type="number" id="dm_lai" placeholder="0"></div><div class="field" style="min-width:80px"><label>Tỷ suất (%)</label><input type="number" id="dm_tysuat" step="0.1"></div><div class="field" style="min-width:90px"><label>Màu sắc NL</label><select id="dm_mausac"><option value="Xanh">☘️ Xanh</option><option value="Đỏ">🔴 Đỏ</option></select></div><div class="field"><label>Ghi chú</label><input type="text" id="dm_note"></div><div style="padding-bottom:1px"><button class="btn" id="dm_add">+ Thêm</button></div></div></div><div class="card"><div class="card-t">Bảng nợ (${D.debtmap.length} khoản) — Tổng: ${fmt(gT+rT)}</div>${D.debtmap.length?`<div style="overflow-x:auto"><table><thead><tr><th>Tên</th><th class="r">Gốc</th><th class="r">Lãi</th><th class="r">Gốc+Lãi</th><th class="r">Tỷ suất</th><th>Màu sắc</th><th>Ghi chú</th><th style="width:28px"></th></tr></thead><tbody>${rows}</tbody></table></div>`:'<div style="text-align:center;padding:28px;color:var(--mut)">Chưa có khoản nợ</div>'}</div>${D.debtmap.length?`<div class="g2"><div class="card"><div class="card-t">Năng lượng nợ</div>${nrgBarHTML(gT,rT)}<div style="display:flex;gap:8px;margin-top:10px"><div class="box" style="flex:1;background:#dcfce7"><div class="box-l">☘️ Nợ Xanh</div><div class="box-v" style="color:#15803d">${fmt(gT)}</div></div><div class="box" style="flex:1;background:#fee2e2"><div class="box-l">🔴 Nợ Đỏ</div><div class="box-v" style="color:#b91c1c">${fmt(rT)}</div></div></div></div><div class="card"><div class="card-t">Cơ cấu nợ</div>${makePie([{name:"Nợ Xanh",value:gT},{name:"Nợ Đỏ",value:rT}],["#16a34a","#dc2626"],160)}</div></div>`:""}`;
+  document.getElementById("dm_add").addEventListener("click",()=>{const ten=document.getElementById("dm_ten").value,goc=document.getElementById("dm_goc").value,lai=document.getElementById("dm_lai").value,tysuat=document.getElementById("dm_tysuat").value,mausac=document.getElementById("dm_mausac").value,note=document.getElementById("dm_note").value;if(!ten||!goc)return alert("Vui lòng nhập Tên và Gốc");addRow("debtmap",{ten,goc,lai:lai||0,tysuat:tysuat||0,mausac,note});});
+}
+
+// ========== ENERGY MONEY ==========
+function renderEnergyMoney(F,E){
+  document.getElementById("tab-energy_money").innerHTML=`<div class="card"><div class="card-t">🌿 THỐNG KÊ NĂNG LƯỢNG TIỀN</div><div class="g2" style="margin-bottom:0"><div class="nrg-info nrg-info-g">${TIEN_XANH}</div><div class="nrg-info nrg-info-r">${TIEN_DO}</div></div></div><div class="stats"><div class="stat" style="border-left-color:#16a34a"><div class="stat-l">☘️ Tổng tiền Xanh</div><div class="stat-v" style="color:#16a34a">${fmt(E.greenAmt)}</div><div class="stat-s">${E.greenCount} giao dịch</div></div><div class="stat" style="border-left-color:#dc2626"><div class="stat-l">🔴 Tổng tiền Đỏ</div><div class="stat-v" style="color:#dc2626">${fmt(E.redAmt)}</div><div class="stat-s">${E.redCount} giao dịch</div></div><div class="stat" style="border-left-color:var(--s500)"><div class="stat-l">📊 Tỷ lệ Xanh/Đỏ</div><div class="stat-v">${E.greenCount+E.redCount?(E.greenAmt/(E.greenAmt+E.redAmt)*100).toFixed(0):0}% / ${E.greenCount+E.redCount?(E.redAmt/(E.greenAmt+E.redAmt)*100).toFixed(0):0}%</div>${nrgBarHTML(E.greenAmt,E.redAmt)}</div></div><div class="g2"><div class="card"><div class="card-t">☘️ Thu nhập theo NL</div>${nrgBarHTML(E.greenIncAmt,E.redIncAmt)}<div style="display:flex;gap:8px;margin-top:8px"><div class="box" style="flex:1;background:#dcfce7"><div class="box-l">Xanh</div><div class="box-v" style="color:#15803d">${fmt(E.greenIncAmt)}</div></div><div class="box" style="flex:1;background:#fee2e2"><div class="box-l">Đỏ</div><div class="box-v" style="color:#b91c1c">${fmt(E.redIncAmt)}</div></div></div>${makePie([{name:"Thu Xanh",value:E.greenIncAmt},{name:"Thu Đỏ",value:E.redIncAmt}],["#16a34a","#dc2626"],130)}</div><div class="card"><div class="card-t">💸 Chi tiêu theo NL</div>${nrgBarHTML(E.greenExpAmt,E.redExpAmt)}<div style="display:flex;gap:8px;margin-top:8px"><div class="box" style="flex:1;background:#dcfce7"><div class="box-l">Xanh</div><div class="box-v" style="color:#15803d">${fmt(E.greenExpAmt)}</div></div><div class="box" style="flex:1;background:#fee2e2"><div class="box-l">Đỏ</div><div class="box-v" style="color:#b91c1c">${fmt(E.redExpAmt)}</div></div></div>${makePie([{name:"Chi Xanh",value:E.greenExpAmt},{name:"Chi Đỏ",value:E.redExpAmt}],["#16a34a","#dc2626"],130)}</div></div>`;
+}
+
+// ========== ENERGY WEEK (with Tuần / Tháng / Năm) ==========
+function renderEnergyWeek(){
+  const el=document.getElementById("tab-energy_week");
+  const dayDates=DAYS.map((name,i)=>{const d=new Date(energyMonday);d.setDate(d.getDate()+i);return{name,date:fmtD(d)};});
+  const sun=new Date(energyMonday);sun.setDate(sun.getDate()+6);
+  const stats=calcEnergyStats(energyWeekData);
+  let html=`<div class="main-hdr" style="border-radius:var(--radius);margin-bottom:12px"><h1>⏰ NĂNG LƯỢNG TUẦN — 5 NGÔI NHÀ</h1></div>`;
+  html+=`<div class="legend-energy"><div class="legend-item legend-goc">🟢 GỐC — Nuôi dưỡng 5 Ngôi Nhà</div><div class="legend-item legend-nhanh">🌿 NHÁNH — Đầu tư có ích</div><div class="legend-item legend-doc">🔴 ĐỘC — Lãng phí cần cắt bỏ</div></div>`;
+  html+=`<div class="week-nav"><button onclick="prevEnergyWeek()">◀ Tuần trước</button><div class="week-info"><div class="week-title">Tuần ${weekNum(energyMonday)} — ${energyMonday.getFullYear()}</div><div class="week-range">${fmtD(energyMonday)} → ${fmtD(sun)}</div></div><button onclick="nextEnergyWeek()">Tuần sau ▶</button></div>`;
+  html+=`<div class="view-tabs"><div class="view-tab ${energyView==='week'?'active':''}" onclick="energyView='week';render()">📅 Tuần</div><div class="view-tab ${energyView==='month'?'active':''}" onclick="energyView='month';render()">📆 Tháng</div><div class="view-tab ${energyView==='year'?'active':''}" onclick="energyView='year';render()">📊 Năm</div></div>`;
+
+  if(energyView==='week'){
+    html+='<div style="overflow-x:auto;margin-top:4px;background:var(--card);border-radius:0 0 var(--radius) var(--radius);box-shadow:var(--sh)"><table class="energy-table"><thead><tr><th class="hour-header" rowspan="2">Giờ</th>';
+    dayDates.forEach((d,i)=>{html+=`<th style="background:var(--day${i})" colspan="2">${d.name} ${d.date}</th>`;});
+    html+='</tr><tr>';for(let i=0;i<7;i++)html+='<th style="background:var(--h2);font-size:10px">📋 HĐ</th><th style="background:var(--h2);font-size:10px">💡 Loại</th>';
+    html+='</tr></thead><tbody>';
+    HOURS.forEach((hour,hIdx)=>{
+      html+=`<tr><td class="time-cell">${hour}</td>`;
+      for(let dIdx=0;dIdx<7;dIdx++){
+        const key=dIdx+'-'+hIdx,cell=energyWeekData[key]||{a:'',c:''},gr=getGroup(cell.c);
+        const cc=gr==='G'?'cell-goc':gr==='N'?'cell-nhanh':gr==='D'?'cell-doc':'';
+        html+=`<td class="act-cell ${cc}" style="min-width:80px"><input class="act-input" value="${escHtml(cell.a)}" placeholder="..." onchange="updEnergy('${key}','a',this.value)"></td>`;
+        html+=`<td class="cat-cell ${cc}" style="min-width:90px"><select class="cat-select" onchange="updEnergy('${key}','c',this.value)"><option value="">— chọn —</option><optgroup label="🟢 GỐC">`;
+        config.energyCats.filter(c=>c.group==='G').forEach(c=>{html+=`<option value="${c.value}" ${cell.c===c.value?'selected':''}>${c.value}</option>`;});
+        html+='</optgroup><optgroup label="🌿 NHÁNH">';config.energyCats.filter(c=>c.group==='N').forEach(c=>{html+=`<option value="${c.value}" ${cell.c===c.value?'selected':''}>${c.value}</option>`;});
+        html+='</optgroup><optgroup label="🔴 ĐỘC">';config.energyCats.filter(c=>c.group==='D').forEach(c=>{html+=`<option value="${c.value}" ${cell.c===c.value?'selected':''}>${c.value}</option>`;});
+        html+='</optgroup></select></td>';
+      }
+      html+='</tr>';
+    });
+    html+='</tbody></table></div>';
+    // Week stats cards
+    const pG=stats.total?Math.round(stats.g/stats.total*100):0,pN=stats.total?Math.round(stats.n/stats.total*100):0,pD=stats.total?Math.round(stats.d/stats.total*100):0;
+    html+=`<div class="stats-panel animate-in"><div class="stats-title">📊 ĐO LƯỜNG CẢ TUẦN</div><div class="stats-grid"><div class="stat-card stat-goc"><div class="stat-label">🟢 GỐC</div><div class="stat-number">${stats.g}</div><div class="stat-pct">${pG}%</div><div class="stat-target">Mục tiêu: ≥ 50%</div></div><div class="stat-card stat-nhanh"><div class="stat-label">🌿 NHÁNH</div><div class="stat-number">${stats.n}</div><div class="stat-pct">${pN}%</div><div class="stat-target">Mục tiêu: 30–40%</div></div><div class="stat-card stat-doc"><div class="stat-label">🔴 ĐỘC</div><div class="stat-number">${stats.d}</div><div class="stat-pct">${pD}%</div><div class="stat-target">Mục tiêu: < 10%</div></div><div class="stat-card stat-total"><div class="stat-label">📊 TỔNG</div><div class="stat-number">${stats.total}</div><div class="stat-pct">${stats.total}/168</div></div></div><div class="goal-banner">🎯 MỤC TIÊU: 🟢 GỐC ≥ 50% │ 🌿 NHÁNH 30–40% │ 🔴 ĐỘC < 10%</div></div>`;
+  } else if(energyView==='month'){
+    html+=buildMonthYearSummary('month');
+  } else {
+    html+=buildMonthYearSummary('year');
+  }
+  el.innerHTML=html;
+}
+
+function buildMonthYearSummary(mode){
+  const targetM=mKey(energyMonday),targetY=energyMonday.getFullYear().toString();
+  const rows=[];
+  Object.entries(energyAllWeeks).forEach(([wk,data])=>{
+    const yr=wk.split('-W')[0],wn=parseInt(wk.split('-W')[1]);
+    const jan1=new Date(parseInt(yr),0,1),approx=new Date(jan1.getTime()+(wn-1)*7*864e5);
+    if(mode==='month'&&mKey(approx)!==targetM)return;
+    if(mode==='year'&&yr!==targetY)return;
+    const s=calcEnergyStats(data);if(s.total===0)return;
+    rows.push({wk,month:approx.getMonth()+1,...s});
+  });
+  rows.sort((a,b)=>a.wk.localeCompare(b.wk));
+
+  let titleText=mode==='month'?`📆 Tổng kết Tháng ${energyMonday.getMonth()+1}/${energyMonday.getFullYear()}`:`📊 Tổng kết Năm ${energyMonday.getFullYear()}`;
+  let html=`<div class="stats-panel animate-in"><div class="stats-title">${titleText}</div>`;
+  if(rows.length===0){html+=`<div style="text-align:center;padding:30px;color:var(--mut)">Chưa có dữ liệu</div>`;}
+  else{
+    // If year mode, aggregate by month
+    let displayRows=rows;
+    if(mode==='year'){
+      const byMonth={};
+      rows.forEach(r=>{
+        const mk=r.month;
+        if(!byMonth[mk])byMonth[mk]={wk:'Tháng '+mk,g:0,n:0,d:0,total:0};
+        byMonth[mk].g+=r.g;byMonth[mk].n+=r.n;byMonth[mk].d+=r.d;byMonth[mk].total+=r.total;
+      });
+      displayRows=Object.values(byMonth).sort((a,b)=>parseInt(a.wk.split(' ')[1])-parseInt(b.wk.split(' ')[1]));
+    }
+    html+='<table class="summary-table"><thead><tr><th>'+(mode==='month'?'Tuần':'Tháng')+'</th><th>🟢 GỐC</th><th>🌿 NHÁNH</th><th>🔴 ĐỘC</th><th>Tổng</th><th>% GỐC</th><th>% NHÁNH</th><th>% ĐỘC</th></tr></thead><tbody>';
+    const totals=displayRows.reduce((a,r)=>({g:a.g+r.g,n:a.n+r.n,d:a.d+r.d,total:a.total+r.total}),{g:0,n:0,d:0,total:0});
+    displayRows.forEach(r=>{
+      const pG=r.total?Math.round(r.g/r.total*100):0,pN=r.total?Math.round(r.n/r.total*100):0,pD=r.total?Math.round(r.d/r.total*100):0;
+      html+=`<tr><td>${r.wk}</td><td style="background:var(--goc-soft);color:var(--goc-text);font-weight:700">${r.g}</td><td style="background:var(--nhanh-soft);color:var(--nhanh-text);font-weight:700">${r.n}</td><td style="background:var(--doc-soft);color:var(--doc-text);font-weight:700">${r.d}</td><td>${r.total}</td><td style="font-weight:700;color:${pG>=50?'var(--goc-text)':'var(--doc-text)'}">${pG}%</td><td style="font-weight:700;color:var(--nhanh-text)">${pN}%</td><td style="font-weight:700;color:${pD<10?'var(--goc-text)':'var(--doc-text)'}">${pD}%</td></tr>`;
+    });
+    const tpG=totals.total?Math.round(totals.g/totals.total*100):0,tpN=totals.total?Math.round(totals.n/totals.total*100):0,tpD=totals.total?Math.round(totals.d/totals.total*100):0;
+    html+=`<tr class="total-row"><td style="background:var(--h1);color:#fff;font-weight:800">TỔNG</td><td style="background:var(--goc-bg);color:var(--goc-text)">${totals.g}</td><td style="background:var(--nhanh-bg);color:var(--nhanh-text)">${totals.n}</td><td style="background:var(--doc-bg);color:var(--doc-text)">${totals.d}</td><td style="background:var(--h1);color:#fff">${totals.total}</td><td style="background:var(--goc-bg);color:var(--goc-text)">${tpG}%</td><td style="background:var(--nhanh-bg);color:var(--nhanh-text)">${tpN}%</td><td style="background:var(--doc-bg);color:var(--doc-text)">${tpD}%</td></tr>`;
+    html+='</tbody></table>';
+    // Summary stat cards
+    html+=`<div class="stats-grid" style="margin-top:16px"><div class="stat-card stat-goc"><div class="stat-label">🟢 GỐC</div><div class="stat-number">${totals.g}</div><div class="stat-pct">${tpG}%</div></div><div class="stat-card stat-nhanh"><div class="stat-label">🌿 NHÁNH</div><div class="stat-number">${totals.n}</div><div class="stat-pct">${tpN}%</div></div><div class="stat-card stat-doc"><div class="stat-label">🔴 ĐỘC</div><div class="stat-number">${totals.d}</div><div class="stat-pct">${tpD}%</div></div></div>`;
+  }
+  html+='</div>';
+  return html;
+}
+
+function updEnergy(key,field,val){if(!energyWeekData[key])energyWeekData[key]={a:'',c:''};energyWeekData[key][field]=val;saveEnergyWeek(wKey(energyMonday),energyWeekData);if(field==='c')render();}
+function prevEnergyWeek(){const d=new Date(energyMonday);d.setDate(d.getDate()-7);loadEnergyWeek(d);render();}
+function nextEnergyWeek(){const d=new Date(energyMonday);d.setDate(d.getDate()+7);loadEnergyWeek(d);render();}
+
+// ========== TARGET ==========
+function renderTarget(){
+  const el=document.getElementById("tab-target");
+  let rows=D.targets.map(r=>`<tr><td>${r.group||""}</td><td>${r.name||""}</td><td class="r b">${fmt(r.amount)}</td><td>${r.period||""}</td><td style="font-size:10px">${r.note||""}</td><td style="white-space:nowrap"><button class="del-btn" style="color:var(--s700)" title="Sửa" onclick="editTarget('${r.id}')">✏️</button><button class="del-btn" title="Xoá" onclick="delRow('targets','${r.id}')">🗑️</button></td></tr>`).join("");
+  el.innerHTML=`<div class="card"><div class="card-t">🎯 THIẾT LẬP MỤC TIÊU</div><div class="form-row"><div class="field"><label>Nhóm</label><select id="tgt_grp">${TGT_GROUPS.map(g=>`<option>${g}</option>`).join("")}</select></div><div class="field"><label>Tên mục tiêu</label><input type="text" id="tgt_name" placeholder="VD: Thu nhập tháng 50tr"></div><div class="field"><label>Số tiền</label><input type="number" id="tgt_amt" placeholder="0"></div><div class="field"><label>Kỳ hạn</label><select id="tgt_period"><option>Tháng</option><option>Quý</option><option>Năm</option></select></div><div class="field"><label>Ghi chú</label><input type="text" id="tgt_note"></div><div style="padding-bottom:1px"><button class="btn" id="tgt_add">+ Thêm</button></div></div></div><div class="card"><div class="card-t">Danh sách mục tiêu (${D.targets.length})</div>${D.targets.length?`<div style="overflow-x:auto"><table><thead><tr><th>Nhóm</th><th>Tên</th><th class="r">Số tiền</th><th>Kỳ hạn</th><th>Ghi chú</th><th style="width:28px"></th></tr></thead><tbody>${rows}</tbody></table></div>`:'<div style="text-align:center;padding:28px;color:var(--mut)">Chưa có mục tiêu</div>'}</div>`;
+  document.getElementById("tgt_add").addEventListener("click",()=>{const group=document.getElementById("tgt_grp").value,name=document.getElementById("tgt_name").value,amount=document.getElementById("tgt_amt").value,period=document.getElementById("tgt_period").value,note=document.getElementById("tgt_note").value;if(!name||!amount)return alert("Nhập tên và số tiền");addRow("targets",{group,name,amount,period,note});});
+}
+
+// ========== BALANCE ==========
+function renderBalance(){
+  const el=document.getElementById("tab-balance");
+  let rows=D.balances.map(r=>`<tr><td>${r.source||""}</td><td class="r b">${fmt(r.amount)}</td><td>${dmy(r.date)}</td><td style="font-size:10px">${r.note||""}</td><td style="white-space:nowrap"><button class="del-btn" style="color:var(--s700)" title="Sửa" onclick="editBalance('${r.id}')">✏️</button><button class="del-btn" title="Xoá" onclick="delRow('balances','${r.id}')">🗑️</button></td></tr>`).join("");
+  const totalBal=sum(D.balances);
+  el.innerHTML=`<div class="card"><div class="card-t">🏦 SỐ DƯ ĐẦU KỲ / HIỆN TẠI</div><div class="form-row"><div class="field"><label>Nguồn tiền</label><select id="bal_src">${srcOpts()}</select></div><div class="field"><label>Số dư</label><input type="number" id="bal_amt" placeholder="0"></div><div class="field"><label>Ngày cập nhật</label><input type="date" id="bal_date"></div><div class="field"><label>Ghi chú</label><input type="text" id="bal_note"></div><div style="padding-bottom:1px"><button class="btn" id="bal_add">+ Thêm</button></div></div></div><div class="card"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:6px"><div class="card-t" style="margin:0">Số dư các nguồn (${D.balances.length})</div><div style="font-size:14px;font-weight:800;color:var(--h1)">Tổng: ${fmt(totalBal)}</div></div>${D.balances.length?`<div style="overflow-x:auto"><table><thead><tr><th>Nguồn</th><th class="r">Số dư</th><th>Ngày</th><th>Ghi chú</th><th style="width:28px"></th></tr></thead><tbody>${rows}</tbody></table></div>`:'<div style="text-align:center;padding:28px;color:var(--mut)">Chưa có số dư</div>'}</div>`;
+  document.getElementById("bal_add").addEventListener("click",()=>{const source=document.getElementById("bal_src").value,amount=document.getElementById("bal_amt").value,date=document.getElementById("bal_date").value,note=document.getElementById("bal_note").value;if(!source||!amount)return alert("Nhập nguồn và số dư");addRow("balances",{source,amount,date,note});});
+}
+
+// ========== TEAM ==========
+function renderTeam(){
+  const el=document.getElementById("tab-team");if(!el)return;
+  const role=ROLES[currentUser.role];
+  const subs=accounts.filter(a=>role.canView.includes(a.role));
+  let html=`<div class="card"><div class="card-t">👥 TỔNG QUAN ĐỘI NHÓM</div><p style="font-size:12px;color:var(--mut);margin-bottom:12px">Vai trò ${role.name} — Xem được: ${role.canView.join(", ")||"Không có"}</p></div>`;
+  subs.forEach(sub=>{
+    const sd=loadJSON(skey(sub.id),{incomes:[],expenses:[],debts:[],savings:[]});
+    const si=sum(sd.incomes),se=sum(sd.expenses),ss=sum(sd.savings);
+    const sr=ROLES[sub.role];
+    html+=`<div class="acct-card"><div style="display:flex;align-items:center;gap:10px"><div class="acct-avatar">${sub.name.charAt(0)}</div><div><div style="font-size:13px;font-weight:700">${sub.name}</div><span class="role-badge ${sr.badge}" style="font-size:9px">${sr.name}</span></div></div><div style="display:flex;gap:14px;flex-wrap:wrap;font-size:11px"><div><span style="color:var(--mut)">Thu:</span> <strong class="c-ok">${fmtS(si)}</strong></div><div><span style="color:var(--mut)">Chi:</span> <strong class="c-no">${fmtS(se)}</strong></div><div><span style="color:var(--mut)">TK&ĐT:</span> <strong class="c-sky">${fmtS(ss)}</strong></div></div></div>`;
+  });
+  if(!subs.length)html+=`<div class="card" style="text-align:center;padding:28px;color:var(--mut)">Không có thành viên cấp dưới</div>`;
+  el.innerHTML=html;
+}
+
+// ========== ACCOUNTS MGMT ==========
+function renderAccounts(){
+  const el=document.getElementById("tab-accounts");if(!el)return;
+  let html=`<div class="card"><div class="card-t">🔑 QUẢN LÝ TÀI KHOẢN</div><div class="form-row"><div class="field"><label>Username</label><input type="text" id="na_user"></div><div class="field"><label>Mật khẩu</label><input type="text" id="na_pass"></div><div class="field"><label>Họ tên</label><input type="text" id="na_name"></div><div class="field"><label>Vai trò</label><select id="na_role"><option value="NPP2">NPP 2</option><option value="VIP">VIP Hạnh Phúc</option><option value="CTV">CTV / Hạt Mầm</option></select></div><div style="padding-bottom:1px"><button class="btn" id="na_add">+ Tạo TK</button></div></div></div>`;
+  html+=`<div class="card"><div class="card-t">Danh sách tài khoản (${accounts.length})</div>`;
+  accounts.forEach(a=>{const r=ROLES[a.role];html+=`<div class="acct-card"><div style="display:flex;align-items:center;gap:10px"><div class="acct-avatar">${a.name.charAt(0)}</div><div><div style="font-size:13px;font-weight:700">${a.name}</div><div style="font-size:10px;color:var(--mut)">@${a.username} <span class="role-badge ${r.badge}" style="font-size:9px">${r.name}</span></div></div></div>${a.id!=='admin'?`<button class="btn btn-del" onclick="delAcct('${a.id}')">✕ Xoá</button>`:''}</div>`;});
+  html+='</div>';
+  el.innerHTML=html;
+  document.getElementById("na_add").addEventListener("click",()=>{const username=document.getElementById("na_user").value.trim(),password=document.getElementById("na_pass").value,name=document.getElementById("na_name").value.trim(),role=document.getElementById("na_role").value;if(!username||!password||!name)return alert("Nhập đủ thông tin");if(accounts.find(a=>a.username===username))return alert("Username đã tồn tại");accounts.push({id:uid(),username,password,name,role,parent:currentUser.id});saveJSON(SKEY_ACCOUNTS,accounts);render();});
+}
+function delAcct(id){if(!confirm("Xoá tài khoản này?"))return;accounts=accounts.filter(a=>a.id!==id);saveJSON(SKEY_ACCOUNTS,accounts);render();}
+
+// ========== CATEGORY EDITOR ==========
+function buildCatEditor(id,label,catArr){
+  let html=`<div class="cat-editor"><div class="cat-editor-hdr" onclick="toggleCatEditor('${id}')"><div class="cat-editor-title">${label}</div><span id="arrow_${id}">▶</span></div><div class="cat-editor-body" id="body_${id}" style="display:none">`;
+  catArr.forEach((g,gi)=>{
+    html+=`<div class="cat-grp"><div class="cat-grp-name"><input value="${escHtml(g.grp)}" onchange="editGrpName('${id}',${gi},this.value)"><button class="btn-xs btn-del-grp" onclick="delGrp('${id}',${gi})">✕ Xoá nhóm</button></div>`;
+    g.items.forEach((item,ii)=>{
+      html+=`<div class="cat-item"><input value="${escHtml(item)}" onchange="editItem('${id}',${gi},${ii},this.value)"><button class="del-btn" onclick="delItem('${id}',${gi},${ii})">✕</button></div>`;
+    });
+    html+=`<button class="btn-xs btn-add-item" onclick="addItem('${id}',${gi})">+ Thêm mục</button></div>`;
+  });
+  html+=`<button class="btn-xs btn-add-grp" onclick="addGrp('${id}')">+ Thêm nhóm</button></div></div>`;
+  return html;
+}
+function toggleCatEditor(id){const body=document.getElementById('body_'+id),arrow=document.getElementById('arrow_'+id);if(!body)return;const showing=body.style.display==='none';body.style.display=showing?'block':'none';arrow.textContent=showing?'▼':'▶';}
+function getCatRef(id){if(id==='incomeCats')return config.incomeCats;if(id==='expenseCats')return config.expenseCats;if(id==='debtCats')return config.debtCats;if(id==='savingCats')return config.savingCats;return null;}
+function saveCatsAndRender(){saveJSON(SKEY_CONFIG,config);render();}
+function editGrpName(id,gi,v){const c=getCatRef(id);if(c&&c[gi])c[gi].grp=v;saveCatsAndRender();}
+function editItem(id,gi,ii,v){const c=getCatRef(id);if(c&&c[gi]&&c[gi].items[ii]!==undefined)c[gi].items[ii]=v;saveCatsAndRender();}
+function delItem(id,gi,ii){const c=getCatRef(id);if(c&&c[gi])c[gi].items.splice(ii,1);saveCatsAndRender();}
+function addItem(id,gi){const c=getCatRef(id);if(c&&c[gi])c[gi].items.push('Mục mới');saveCatsAndRender();}
+function delGrp(id,gi){const c=getCatRef(id);if(c){if(!confirm('Xoá nhóm này?'))return;c.splice(gi,1);}saveCatsAndRender();}
+function addGrp(id){const c=getCatRef(id);if(c)c.push({grp:'Nhóm mới',items:['Mục mới']});saveCatsAndRender();}
+function removeEnCat(i){config.energyCats.splice(i,1);saveJSON(SKEY_CONFIG,config);render();}
+function removeSrc(i){config.moneySources.splice(i,1);saveJSON(SKEY_CONFIG,config);render();}
+function buildTypeGroupEditor(){
+  if(!config.typeGroups)config.typeGroups=[];
+  return config.typeGroups.map((tg,gi)=>{
+    const itemTags=tg.items.map((item,ii)=>`<span class="src-tag" style="font-size:11px;padding:3px 8px;margin:2px">${item}<button class="del-btn" style="font-size:10px;margin-left:4px" onclick="delTGItem(${gi},${ii})">✕</button></span>`).join('');
+    return`<div class="cat-grp"><div class="cat-grp-name"><input value="${escHtml(tg.name)}" onchange="editTGName(${gi},this.value)" style="max-width:200px"><button class="btn-xs btn-del-grp" onclick="delTG(${gi})">✕ Xoá</button></div><div style="padding-left:8px;margin-bottom:4px">${itemTags||'<span style="font-size:10px;color:var(--mut)">Chưa có từ khoá</span>'}</div><div style="padding-left:8px;display:flex;gap:4px;align-items:center"><input type="text" id="tg_new_${gi}" placeholder="Thêm từ khoá..." style="max-width:180px;font-size:11px;padding:3px 8px"><button class="btn-xs btn-add-item" onclick="addTGItem(${gi})">+ Thêm</button></div></div>`;
+  }).join('');
+}
+function editTGName(i,v){if(!config.typeGroups[i])return;config.typeGroups[i].name=v;saveJSON(SKEY_CONFIG,config);render();}
+function delTGItem(gi,ii){config.typeGroups[gi].items.splice(ii,1);saveJSON(SKEY_CONFIG,config);render();}
+function addTGItem(gi){const el=document.getElementById('tg_new_'+gi);if(!el)return;const v=el.value.trim();if(!v)return;config.typeGroups[gi].items.push(v);saveJSON(SKEY_CONFIG,config);render();}
+function delTG(i){if(!confirm('Xoá nhóm này?'))return;config.typeGroups.splice(i,1);saveJSON(SKEY_CONFIG,config);render();}
+
+// ========== SETTINGS ==========
+function renderSettings(){
+  const el=document.getElementById("tab-settings");
+  let enCatsHtml=config.energyCats.map((c,i)=>{const bg=c.group==='G'?'var(--goc-bg)':c.group==='N'?'var(--nhanh-bg)':'var(--doc-bg)';const tc=c.group==='G'?'var(--goc-text)':c.group==='N'?'var(--nhanh-text)':'var(--doc-text)';return`<span style="display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:6px;background:${bg};color:${tc};font-size:11px;font-weight:600;margin:2px">${c.value}<button class="del-btn" style="font-size:10px" onclick="removeEnCat(${i})">✕</button></span>`;}).join("");
+  let srcHtml=config.moneySources.map((s,i)=>`<span class="src-tag" style="font-size:11px;padding:4px 10px;margin:2px">${s}<button class="del-btn" style="font-size:10px;margin-left:4px" onclick="removeSrc(${i})">✕</button></span>`).join("");
+  el.innerHTML=`
+    <div class="card"><div class="card-t">⚙️ CÀI ĐẶT HỆ THỐNG</div>
+      <div class="form-row" style="margin-bottom:14px"><div class="field"><label>Tên ứng dụng</label><input type="text" id="s_name" value="${escHtml(config.appName)}"></div><div class="field"><label>Slogan</label><input type="text" id="s_slogan" value="${escHtml(config.slogan)}"></div><div style="padding-bottom:1px"><button class="btn" id="s_save_name">💾 Lưu</button></div></div>
+    </div>
+    <div class="card"><div class="card-t">💳 NGUỒN TIỀN</div>
+      <div style="margin-bottom:8px">${srcHtml}</div>
+      <div class="form-row"><div class="field"><label>Thêm nguồn</label><input type="text" id="s_newSrc" placeholder="VD: Ngân hàng ABC..."></div><div style="padding-bottom:1px"><button class="btn btn-light" id="s_addSrc">+ Thêm</button></div></div>
+    </div>
+    <div class="card"><div class="card-t">📊 NHÓM NGUỒN BÁO CÁO (theo loại thu/chi)</div>
+      <p style="font-size:11px;color:var(--mut);margin-bottom:10px">Gom các loại (SHMT, PRHOUSE, AFFILIATE, COACH...) vào nhóm để xem báo cáo tổng hợp. Nhập từ khoá — nếu tên "Loại" chứa từ khoá thì thuộc nhóm đó. Loại không khớp nhóm nào sẽ hiện riêng.</p>
+      ${buildTypeGroupEditor()}
+      <div class="form-row" style="margin-top:8px"><div class="field"><label>Tên nhóm mới</label><input type="text" id="s_newTGName" placeholder="VD: PRHOUSE, SHMT..."></div><div style="padding-bottom:1px"><button class="btn btn-light" id="s_addTG">+ Thêm nhóm</button></div></div>
+    </div>
+    <div class="card"><div class="card-t">📂 DANH MỤC THU NHẬP / CHI TIÊU / NỢ / TK&ĐT</div>
+      <p style="font-size:11px;color:var(--mut);margin-bottom:10px">Bấm vào từng nhóm để mở rộng, chỉnh sửa tên nhóm, thêm/xoá mục con.</p>
+      ${buildCatEditor('incomeCats','💰 Danh mục Thu nhập',config.incomeCats)}
+      ${buildCatEditor('expenseCats','💸 Danh mục Chi tiêu',config.expenseCats)}
+      ${buildCatEditor('debtCats','📋 Danh mục Công nợ',config.debtCats)}
+      ${buildCatEditor('savingCats','📈 Danh mục Tiết kiệm & Đầu tư',config.savingCats)}
+    </div>
+    <div class="card"><div class="card-t">⏰ DANH MỤC NĂNG LƯỢNG TUẦN</div>
+      <div style="margin-bottom:8px">${enCatsHtml}</div>
+      <div class="form-row"><div class="field"><label>Tên danh mục</label><input type="text" id="s_enName" placeholder="VD: [G] Thiền định"></div><div class="field"><label>Nhóm</label><select id="s_enGrp"><option value="G">🟢 GỐC</option><option value="N">🌿 NHÁNH</option><option value="D">🔴 ĐỘC</option></select></div><div style="padding-bottom:1px"><button class="btn btn-light" id="s_addEn">+ Thêm</button></div></div>
+    </div>
+    <div class="card"><div class="card-t">💾 DỮ LIỆU</div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px">
+        <div class="box" style="flex:1;min-width:100px"><div class="box-l">Thu nhập</div><div class="box-v">${D.incomes.length}</div></div>
+        <div class="box" style="flex:1;min-width:100px"><div class="box-l">Chi tiêu</div><div class="box-v">${D.expenses.length}</div></div>
+        <div class="box" style="flex:1;min-width:100px"><div class="box-l">Công nợ</div><div class="box-v">${D.debts.length}</div></div>
+        <div class="box" style="flex:1;min-width:100px"><div class="box-l">TK&ĐT</div><div class="box-v">${D.savings.length}</div></div>
+        <div class="box" style="flex:1;min-width:100px"><div class="box-l">NL Tuần</div><div class="box-v">${Object.keys(energyAllWeeks).length} tuần</div></div>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" id="exportBtn">📤 Xuất JSON</button><button class="btn btn-light" id="importBtn">📥 Nhập JSON</button><input type="file" id="importFile" accept=".json" style="display:none"><button class="btn btn-del" id="resetBtn">🗑️ Xoá toàn bộ</button></div>
+    </div>`;
+  document.getElementById("s_save_name").addEventListener("click",()=>{config.appName=document.getElementById("s_name").value||config.appName;config.slogan=document.getElementById("s_slogan").value||config.slogan;saveJSON(SKEY_CONFIG,config);renderApp();});
+  document.getElementById("s_addSrc").addEventListener("click",()=>{const v=document.getElementById("s_newSrc").value.trim();if(!v)return;config.moneySources.push(v);saveJSON(SKEY_CONFIG,config);render();});
+  const tgBtn=document.getElementById("s_addTG");if(tgBtn)tgBtn.addEventListener("click",()=>{const v=document.getElementById("s_newTGName").value.trim();if(!v)return;if(!config.typeGroups)config.typeGroups=[];config.typeGroups.push({name:v,items:[]});saveJSON(SKEY_CONFIG,config);render();});
+  document.getElementById("s_addEn").addEventListener("click",()=>{const name=document.getElementById("s_enName").value.trim(),grp=document.getElementById("s_enGrp").value;if(!name)return;config.energyCats.push({value:name,group:grp});saveJSON(SKEY_CONFIG,config);render();});
+  document.getElementById("exportBtn").addEventListener("click",()=>{
+    const blob=new Blob([JSON.stringify({finance:D,config,accounts,energyAllWeeks},null,2)],{type:"application/json"});
+    const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="GMHP_backup_"+currentUser.username+"_"+new Date().toISOString().slice(0,10)+".json";a.click();
+  });
+  document.getElementById("importBtn").addEventListener("click",()=>document.getElementById("importFile").click());
+  document.getElementById("importFile").addEventListener("change",e=>{
+    const f=e.target.files[0];if(!f)return;
+    const r=new FileReader();r.onload=ev=>{try{const p=JSON.parse(ev.target.result);
+      if(p.finance){D={...D,...p.finance};saveUserData();}
+      if(p.config){config={...config,...p.config};saveJSON(SKEY_CONFIG,config);}
+      if(p.accounts){accounts=p.accounts;saveJSON(SKEY_ACCOUNTS,accounts);}
+      if(p.energyAllWeeks){Object.entries(p.energyAllWeeks).forEach(([wk,data])=>{saveEnergyWeek(wk,data);});}
+      loadUserData();loadEnergyWeek(energyMonday);renderApp();alert("✅ Nhập dữ liệu thành công!");
+    }catch(err){alert("❌ File không hợp lệ: "+err.message);}};r.readAsText(f);
+  });
+  document.getElementById("resetBtn").addEventListener("click",()=>{
+    if(!confirm("⚠️ Xoá toàn bộ dữ liệu tài chính & năng lượng?"))return;
+    D={incomes:[],expenses:[],debts:[],savings:[],targets:[],balances:[],debtmap:[]};saveUserData();
+    // Clear energy weeks
+    for(let i=localStorage.length-1;i>=0;i--){const k=localStorage.key(i);if(k&&k.startsWith(ekey(currentUser.id)))localStorage.removeItem(k);}
+    energyAllWeeks={};energyWeekData=emptyWeek();render();
+  });
+}
+
+// ========== INIT ==========
+renderLogin();
+</script>
+</body>
+</html>
